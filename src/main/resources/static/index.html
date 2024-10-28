@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Application</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align: center">User Management</h1>
+
+    <!-- Form to Add/Edit Users -->
+    <form id="user-form">
+        <input type="hidden" id="user-id">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Add User</button>
+        <button type="button" id="update-btn" style="display: none;">Update User</button>
+    </form>
+
+
+    <!-- User List -->
+    <h2>User List</h2>
+    <table id="user-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Rows will be populated here by JavaScript -->
+        </tbody>
+    </table>
+</div>
+<!--<div id="toast" class="toast">Thành công!</div>-->
+
+<script src="js/app.js"></script>
+</body>
+</html>
