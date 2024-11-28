@@ -16,13 +16,14 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://172.20.10.2:8080") // Kiểm tra đúng địa chỉ
+                        .allowedOrigins("http://192.168.1.64:8080") // Kiểm tra đúng địa chỉ
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }
         };
     }
+
 
     @Autowired
     private HttpLoggingInterceptor httpLoggingInterceptor;

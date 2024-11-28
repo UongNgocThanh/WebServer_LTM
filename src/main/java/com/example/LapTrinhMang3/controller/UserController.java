@@ -27,10 +27,10 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public Users createUser(@RequestBody Users users) {
-        return userService.createUser(users);
-    }
+//    @PostMapping
+//    public Users createUser(@ModelAttribute Users users) {
+//        return userService.createUser(users);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users userDetails) {
@@ -42,5 +42,6 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
 }
 

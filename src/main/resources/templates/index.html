@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{head2}"></div>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Header -->
+    <div th:replace="~{header2}"></div>
+
+    <!-- Sidebar -->
+    <div th:replace="~{sidebar2}"></div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1 class="mt-4">Danh sách Nhân Viên</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            </ol>
+        </section>
+
+        <!-- Thống kê nhỏ -->
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>150</h3>
+                            <p>New Orders</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <p>Bounce Rate</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>44</h3>
+                            <p>User Registrations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>65</h3>
+                            <p>Unique Visitors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Thông báo thành công hoặc thất bại -->
+
+        <div th:if="${message}" class="alert" th:class="${alertClass}">
+            <span th:text="${message}"></span>
+        </div>
+
+        <!-- Danh sách nhân viên -->
+        <section class="content">
+            <div class="box">
+                <div class="box-header">
+                    <a th:href="@{/list/add-user}" class="btn btn-success">+ Thêm Nhân Viên</a>
+
+                    <!-- Tìm kiếm -->
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /box-header -->
+
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Chức vụ</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Lương</th>
+                            <th>Thưởng</th>
+                            <th>Giờ làm việc</th>
+                            <th>Tùy Chọn</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${usersPage.content}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${#dates.format(user.dob, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${user.gender}"></td>
+                            <td th:text="${user.address}"></td>
+                            <td th:text="${user.phoneNumber}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.jobTitle}"></td>
+                            <td th:text="${#dates.format(user.startDate, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${user.salary}"></td>
+                            <td th:text="${user.bonus}"></td>
+                            <td th:text="${user.workingHours}"></td>
+                            <td>
+                                <a th:href="@{list/edit-user/{id}(id=${user.id})}" class="btn btn-success">Sửa</a>
+                                <a th:href="@{/list/delete-user/{id}(id=${user.id})}" class="btn btn-danger"
+                                   onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /box-body -->
+
+                <!-- Phân trang -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" role="status" aria-live="polite">
+                                <span th:text="'Showing ' + ${usersPage.number * usersPage.size + 1} + ' to ' + ${usersPage.number * usersPage.size + usersPage.content.size()} + ' of ' + ${usersPage.totalElements} + ' entries'"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                <ul class="pagination">
+                                    <!-- Nút Previous chỉ hiển thị khi không ở trang đầu -->
+                                    <li th:if="${usersPage.number > 0}">
+                                        <a th:href="@{/list(page=${usersPage.number - 1})}">&laquo; Previous</a>
+                                    </li>
+
+                                    <!-- Các trang -->
+                                    <li th:each="i : ${#numbers.sequence(0, usersPage.totalPages - 1)}"
+                                        th:classappend="${usersPage.number == i ? ' active' : ''}">
+                                        <a th:href="@{/list(page=${i})}" th:text="${i + 1}"></a>
+                                    </li>
+
+                                    <!-- Nút Next chỉ hiển thị khi không ở trang cuối -->
+                                    <li th:if="${usersPage.number < usersPage.totalPages - 1}">
+                                        <a th:href="@{/list(page=${usersPage.number + 1})}">Next &raquo;</a>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /Content Wrapper -->
+
+    <!-- Footer -->
+    <div th:replace="~{footer2}"></div>
+
+</div>
+
+<!-- /Site wrapper -->
+
+</body>
+</html>
