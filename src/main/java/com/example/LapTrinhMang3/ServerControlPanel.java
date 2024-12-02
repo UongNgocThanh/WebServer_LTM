@@ -18,21 +18,22 @@ public class ServerControlPanel extends JFrame {
         setTitle("Server Control Panel");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-
-        JButton startButton = new JButton("Start Server");
-        JButton stopButton = new JButton("Stop Server");
-
+        // Log Area
         logArea = new JTextArea(30, 50);
         logArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(logArea);
 
-        // Hướng log từ System.out và System.err đến JTextArea
+        // Redirect System.out and System.err to JTextArea
         CustomOutputStream customOutputStream = new CustomOutputStream(logArea);
         System.setOut(new PrintStream(customOutputStream));
         System.setErr(new PrintStream(customOutputStream));
+
+        // Control Panel
+        JPanel controlPanel = new JPanel();
+        JButton startButton = new JButton("Start Server");
+        JButton stopButton = new JButton("Stop Server");
 
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -61,11 +62,10 @@ public class ServerControlPanel extends JFrame {
             }
         });
 
-        panel.add(startButton);
-        panel.add(stopButton);
-        panel.add(scrollPane);
-
-        add(panel);
+        controlPanel.add(startButton);
+        controlPanel.add(stopButton);
+        add(controlPanel, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
     }
 
     public void log(String message) {

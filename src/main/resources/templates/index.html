@@ -160,12 +160,12 @@
                                     <!-- Các trang -->
                                     <li th:each="i : ${#numbers.sequence(0, usersPage.totalPages - 1)}"
                                         th:classappend="${usersPage.number == i ? ' active' : ''}">
-                                        <a th:href="@{/list(page=${i})}" th:text="${i + 1}"></a>
+                                        <a th:href="@{/(page=${i})}" th:text="${i + 1}"></a>
                                     </li>
 
                                     <!-- Nút Next chỉ hiển thị khi không ở trang cuối -->
                                     <li th:if="${usersPage.number < usersPage.totalPages - 1}">
-                                        <a th:href="@{/list(page=${usersPage.number + 1})}">Next &raquo;</a>
+                                        <a th:href="@{/(page=${usersPage.number + 1})}">Next &raquo;</a>
                                     </li>
                                 </ul>
 

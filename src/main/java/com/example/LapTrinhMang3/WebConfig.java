@@ -1,6 +1,8 @@
 package com.example.LapTrinhMang3;
 
+import com.example.LapTrinhMang3.Filter.LoggingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -16,13 +18,21 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://192.168.1.64:8080") // Kiểm tra đúng địa chỉ
+                        .allowedOrigins("http://192.168.1.12:8080") // Kiểm tra đúng địa chỉ
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }
         };
     }
+//
+//    @Bean
+//    public FilterRegistrationBean<LoggingFilter> loggingFilter() {
+//        FilterRegistrationBean<LoggingFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new LoggingFilter());
+//            registrationBean.addUrlPatterns("/api/*");  // Đặt các URL mà bạn muốn filter
+//        return registrationBean;
+//    }
 
 
     @Autowired

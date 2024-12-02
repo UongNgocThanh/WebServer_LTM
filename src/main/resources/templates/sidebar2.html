@@ -6,7 +6,8 @@
         <img th:src="@{assets/images/user.jpg}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Uông Ngọc Thành</p>
+        <p><span th:text="${username}"></span></p>
+
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
@@ -21,9 +22,13 @@
     </form>
 
     <ul class="sidebar-menu" data-widget="user">
-      <li><a href="/list"><i class="fa fa-users"></i> <span>Quản Lí Nhân Sự</span><span class="pull-right-container"><small class="label pull-right bg-green">FE</small></span></a></li>
+      <li><a href="/"><i class="fa fa-users"></i> <span>Quản Lí Nhân Sự</span><span class="pull-right-container"><small class="label pull-right bg-green">FE</small></span></a></li>
 
       <li><a href="#"><i class="fa fa-tasks"></i> <span>Quản Lí Công Việc </span><span class="pull-right-container"><small class="label pull-right bg-green">Hot</small></span></a></li>
+      <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> <span>Đăng Xuất </span><span class="pull-right-container"></span></a></li>
+
+<!--      <li>  <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Log-out</a>-->
+<!--      </li>-->
     </ul>
   </section>
 </aside>
