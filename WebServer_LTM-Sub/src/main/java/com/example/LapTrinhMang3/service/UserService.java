@@ -24,6 +24,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Page<Users> searchUsers(String search, Pageable pageable) {
+        return userRepository.findByUsernameContainingOrEmailContaining(search, search, pageable);
+    }
+
+
     public Optional<Users> getUserById(Long id) {
         return userRepository.findById(id);
     }
